@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sample login page using flask</title>
+</head>
+<style>
+    body {
+        display: grid;
+        place-items: center;
+    }
+
+    .log {
+        text-align: center;
+        box-shadow: 0px 0px 20px 2px green;
+        height: 230px;
+        width: 400px;
+        justify-content: center;
+        /* center horizontally |||*/
+        align-items: center;
+        /* center vertically ---*/
+        margin-top: 200px;
+        border-radius: 5px;
+    }
+
+    .log input {
+        text-align: center;
+        margin-bottom: 20px;
+        height: 25px;
+        width: 200px;
+        border-radius: 5px;
+        position: relative;
+    }
+
+    .pass {
+        margin-left: 50px;
+    }
+
+    .pass button {
+        background-color: greenyellow;
+        border: 2px solid green;
+        border-radius: 5px;
+    }
+
+    .btn {
+        border: 2px solid blue;
+        background-color: aquamarine;
+    }
+
+    .btn:hover {
+        scale: 1.1;
+        background-color: aqua;
+    }
+
+    .msg {
+        color: red;
+    }
+    .signup{
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+</style>
+<script>
+    function show_pass() {
+        const pInput = document.getElementById("pass");
+        const btn = document.getElementById("sbtn");
+        if (btn.textContent === "show") {
+            btn.textContent = "hide";
+        }
+        else {
+            btn.textContent = "show";
+        }
+        if (pInput.type === "password") {
+            pInput.type = "text";
+        }
+        else {
+            pInput.type = "password";
+        }
+    }
+</script>
+
+
+<body>
+    <div class="container">
+        <div class="log">
+            <h2 class="title">login</h2>
+            <form action="/login" method="post">
+                <input type="text" placeholder="username" required name="username"> <br>
+                <div class="pass">
+                    <input id="pass" type="password" placeholder="password" required name="password">
+                    <button onclick="show_pass()" id="sbtn" type="button">show</button>
+                </div>
+                <button class="btn" type="submit">submit</button><br>
+                <div class="signup">
+                    <span>Do you haven't <a href="/signup">Create Account</a></span>
+                </div>
+            </form>
+            {%if error%}
+            <div class="msg">
+                <span id="msg"> {{error}} </span>
+            </div>
+            {%endif%}
+        </div>
+    </div>
+</body>
+<script>
+    const msg = document.getElementById("msg");
+    if (msg) {
+        setTimeout(() => {
+            msg.style.display = "none";
+        }, 2000);
+    }
+</script>
+</html>
